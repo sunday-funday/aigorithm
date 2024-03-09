@@ -39,7 +39,6 @@ class Programmers134239 {
             val range = ranges[i]
             val a = range[0]
             val b = n + range[1]
-            println("a = $a, b = $b")
 
             if (a > b) {
                 answer.add(-1.0)
