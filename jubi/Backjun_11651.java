@@ -2,42 +2,33 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+
+    private static int n;
+    private static int m;
+    private static boolean[] visited;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
 
-        int n = scanner.nextInt();
-        Point[] arr = new Point[n];
+        visited = new boolean[n+1];
 
-        for (int i = 0; i < n; i++) {
-            arr[i] = new Point(scanner.nextInt(), scanner.nextInt());
-        }
-
-        Arrays.sort(arr);
-
-        for (int i = 0; i < n; i++) {
-            Point point = arr[i];
-
-            System.out.println(point.x + " " + point.y);
-        }
-    }
-}
-
-class Point implements Comparable<Point> {
-
-    int x;
-    int y;
-
-    Point(int x, int y) {
-        this.x = x;
-        this.y = y;
+        dfs(1, 0);
     }
 
-    @Override
-    public int compareTo(Point o) {
-        if (this.y == o.y) {
-            return this.x - o.x;
+    private static void dfs(int L, int cnt) {
+        if (cnt == m) {
+            for (int i = 1; i <= n; i++) {
+                if (visited[i]) {
+                    System.out.println(i);
+                }
+            }
         } else {
-            return this.y - o.y;
+            visited[L] = true
+            dfs(L + 1, cnt + 1);
+            visited[L] = false
+            dfs(L, cnt);
         }
     }
 }
